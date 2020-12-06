@@ -1,0 +1,459 @@
+We started by testing the error conditions in the command line argument. These include incorrect number of arguments (e.g. more than 2) and negative value for seed. The program printed the correct error statements and exited when these states were entered. Furthermore, we tested the conditions when certain command line arguments were omitted and defaults were used, and the program correctly resorted to soda.config and PID for the configuration files and seed respectively. For the sake of this assignment, we assumed the name given for the configuration file is valid and the file exists.
+
+2. Test Cases
+For the following test cases, certain outputs may be omitted due to overly long output prints that don’t provide any additional information. In these cases only the interesting parts of the output will be shown, and the parts omitted will be explicitly stated. All tests were run with multiple and singular processors.
+
+	2.1 Base Cases: Setting Configuration Values to 1
+
+The following shows a run where all configuration values were set to 1. Much of the parent printings areomitted:
+
+Parent	Gropoff	WATOff	Names	Truck	Plant	Stud0	Mach0	Cour0
+*******	*******	*******	*******	*******	*******	*******	*******	*******
+S	S	S						S
+
+* Outputs Omitted* 
+D0,1			S
+D0,1					S	S2,1	S1
+D0,3			R0
+D0,3						V0
+D0,2	D1	C0,5	N0,0	S	G1
+D0,3	F	W		P1	P			t0,5
+D0,2				d0,1	G1			T0,5
+D0,2			N0,0			V0
+D0,1							r
+D0,1				U0,3			R
+D0,1				D0,0
+D0,3			N0,0			V0
+D0,2				P1
+D0,1			N0,0	d0,1	P	V0	r
+D0,3				U0,2	G1		R
+D0,3				D0,0		G2,0	B2,0
+D0,2				P1	P	F
+D0,3				d0,1	G1		r
+D0,3				U0,2			R
+D0,3				D0,0
+D0,3
+D0,1				F
+D0,1
+D0,1
+D0,3
+D0,3
+D0,2					F
+D0,1
+*Outputs Omitted* 
+
+With all configuration values set to 1, it can be observed the student makes a single purchase using only the giftcard.
+
+Several other tests were done while holding majority of the configuration values at 1 and varying one value. The following shows when the student makes multiple purchases:
+
+Parent  Gropoff WATOff  Names   Truck   Plant   Stud0   Mach0   Cour0
+******* ******* ******* ******* ******* ******* ******* ******* *******
+*Outputs Omitted*
+D0,1
+D0,2			S				S1
+D0,3			R0		S	S0,1
+D0,2			N0,0			V0
+D0,3	D1	C0,5		S	G1
+D0,3	F	W						t0,5
+D0,2				P1	P			T0,5
+D0,3			N0,0	d0,1	G1	V0	r
+D0,3				U0,3			R
+D0,1				D0,0
+D0,3						a0,1
+D0,1				P1	P
+D0,3			N0,0	d0,1	G2	V0	r
+D0,3				U0,3			R
+D0,2				D0,0		G0,0	B0,0
+D0,3				P2	P	F
+D0,3				d0,2	G2
+D0,1							r
+D0,1				U0,2			R
+D0,3				D0,0
+D0,3
+D0,1				F
+D0,3
+D0,2
+
+In the above run, the student gets a free soda with the giftcard, then proceeds to buy one with the giftcard.
+
+The following shows an example of the courier losing the watcard (and the student acknowledging it:
+
+Parent  Gropoff WATOff  Names   Truck   Plant   Stud0   Mach0   Cour0
+******* ******* ******* ******* ******* ******* ******* ******* *******
+*Outputs Omitted*
+D0,1			R0
+D0,1						V0
+D0,3		C0,5	N0,0	S	G0
+D0,3		W		P0	P			t0,5
+D0,3				d0,0	G2			L0
+D0,2	D1					L	r
+D0,2	F	C0,5		U0,4			R
+D0,1		W		D0,0				t0,5
+D0,2			N0,0	P2	P	V0		L0
+D0,3				d0,2	G1	V0
+D0,3			N0,0				r
+D0,1				U0,2			R
+D0,3			N0,0	D0,0		V0
+D0,3			N0,0	P1	P	V0
+D0,2				d0,1	G3		r
+D0,2				U0,1			R
+D0,1				D0,0
+D0,2			N0,0			V0
+D0,1			N0,0	P3	P	V0
+D0,3				d0,3	G3	V0
+D0,1			N0,0				r
+D0,2				D0,2			R
+D0,3				P3	P	G2,0	B2,0
+D0,2				d0,3	G1	L	r
+D0,3		C0,5		U0,1			R
+D0,2		W		D0,3				t0,5
+D0,1				P1	P	V0		T0,5
+D0,1			N0,0	d0,1	G3
+D0,1			N0,0			V0	r
+D0,3				U0,1			R
+D0,3			N0,0	D0,1		V0
+D0,1			N0,0			V0
+*Outputs Omitted*
+
+More tests were done where the student purchased additional sodas using their watcard, and where the student received a free soda while using their watcard (and then buys more sodas later with that card). In all cases the output were displayed correctly.
+
+	2.2 Higher Configuration Values
+
+
+We first tested when multiple students were involved. Purchases were reset to 1 from each student, and we increased the groupoffdelay to 20. In the following run, we can see different students making their purchases using different methods. Also note all students have to select from one vending machine (since that value is still 1). Additional runs also had examples of a courier losing one of the student's card.
+
+Parent	Gropoff	WATOff	Names	Truck	Plant	Stud0	Stud1	Stud2	Stud3	Mach0	Cour0
+*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******
+
+*Outputs Omitted*
+D1,2
+D0,2			S							S1
+D2,2			R0		S	S0,1
+D3,3		C0,5	N0,0	S	G1	V0	S3,1	S1,1	S2,1
+D3,1		W	N1,0				V0				t0,5
+D1,1		C1,5	N2,0					V0			T0,5
+D0,2			N3,0						V0
+D3,3		C2,5
+D1,2		C3,5	N0,0			V0
+D2,1		W		P1	P						t1,5
+D0,2			N1,0	d0,1	G3		V0				T1,5
+D3,1	D1	W	N0,0			V0				r	t2,5
+D0,2				U0,3						R	T2,5
+D2,1		W		D0,0							t3,5
+D0,3	D1		N1,0	X		G0,0	V0	V0			T3,5
+D1,2			N2,0			F				B0,0
+D2,1				P3	P
+D2,2			N3,0	d0,3	G2				V0
+D0,2	D1		N1,0				V0			r
+D0,2				U0,1						R
+D1,1	D1			D0,0				B1,4		B1,0
+D2,3	F			P2	P			F	G2,0	B2,0
+D3,1				d0,2	G3		G3,0		F	B3,0
+D0,2							F
+D1,3										r
+D3,3				U0,2
+				D0,0
+D0,2				X						R
+D3,1
+
+
+
+The next test shows the following:
+Multiple Students, Multiple Couriers, Mulitple Purchases, 1 Vending Machine
+Here we can see approximately 1 courier handles the work for 1 student (with courier 1 losing the card once). All logistics of the run has been met properly. We can see each student purchasing from the one vending maching, using their giftcards once before using the watcard (student 4 gets a free soda twice before using their card). We also see that the students make purchases only after enough money has reached their accounts, and display randomness in terms of their chosen favourite flavour and total number of purchases
+
+Parent	Gropoff	WATOff	Names	Truck	Plant	Stud0	Stud1	Stud2	Stud3	Mach0	Cour0	Cour1	Cour2	Cour3
+*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******
+	S	S	S		S	S2,3	S3,4	S0,3	S0,1	S1	S
+*Omitted Truck and Vending Machine Delivery*
+
+D0,1				P3
+D3,3				d0,3	P					r		S	S
+D0,2		C0,5		D0,3	G3									S
+D2,3		C1,5		P3	P					R
+D0,2		C2,5		d0,3	G2		G3,0			B3,0
+D2,2		C3,5								r
+D3,1		W		D0,2						R	t0,5
+D3,1		W		P2	P	G2,0				B2,0	L0	t1,5
+D3,3		W		d0,2	G1	L			a0,1			T1,5	t2,5
+D2,2		W	N2,0					V0					T2,5	t3,5
+D2,1		C0,5		U0,1						r				T3,5
+D0,2		W		D0,1						R	t0,5
+D0,2				P1	P		B3,4			B3,0	T0,5
+D2,3				d0,1	G3				a0,1
+D3,3			N2,0					V0		r
+D1,3				U0,2						R
+D3,1			N0,0	D0,0		V0
+D3,2							B3,3			B3,0
+D1,1			N2,0	P3	P			V0
+D1,3			N3,0	d0,3	G4				V0
+D0,2			N0,0			V0				r
+D1,3				U0,1						R
+D3,3				D0,1			B3,2			B3,0
+D1,1			N2,0	P4	P		F	V0
+D0,1			N3,0	d0,4	G3	B2,4			V0	B2,0
+D0,1										r
+D3,1				D0,1						R
+D0,3								G0,0		B0,0
+D3,3				P3	P
+D0,1			N3,0	d0,3	G4	B2,3			V0	B2,0
+D2,2						F				r
+D0,1				D0,1						R
+D3,3				P4	P			B0,4		B0,0
+D0,3			N3,0	d0,4	G2				V0
+D0,1			N2,0					V0		r
+D2,3				D0,3						R
+D2,2									G0,0	B0,0
+D1,3			N2,0	P2	P			V0	F
+D3,2			N2,0	d0,2	G1			V0		r
+D1,3				D0,1						R
+D0,2				P1				B0,3		B0,0
+D2,2				d0,1	P			F
+D3,2					G3					r
+D3,2				D0,0
+D0,1										R
+D0,2
+D3,1
+D1,3				P3
+D3,1				d0,3	P					r
+D3,2				D0,3	G4					R
+D1,3				F
+D0,2
+D2,1
+D1,2					F
+D3,2
+D3,3
+D0,1
+D3,3										F
+
+
+
+Our next test shows the situation of high demand and low supply:
+High Number of Students, High Number of Vending Machines, Low Production, Low Storage per machine
+As can be seen, the students may experience a shortage of stock multiple times at multiple machines. Specifically, you can notice the third student continuoslyquerying all 4 machines in a round robin fashion, since the plant cannot meet the students' demands since it produces 1 max per flavour. 
+Parent	Gropoff	WATOff	Names	Truck	Plant	Stud0	Stud1	Stud2	Stud3	Mach0	Mach1	Mach2	Mach3	Cour0
+*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******
+S	S	S												S
+*OUTPUT OMITTED*
+
+D2,1
+D0,2					S								S1
+D2,3			R3			S1,1
+D1,3		C0,5	N0,0	S	G2	V0	S1,1	S2,2	S0,2
+D0,3		W	N1,1				V1							t0,5
+D2,2		C1,5	N2,2					V2						T0,5
+D3,2			N3,3						V3
+D3,3		C2,5	N0,1			V1
+D1,1	D1	C3,5		P2
+D0,2		W		d0,2	P									t1,5
+D1,2	D1		N3,0		G3				V0	r				T1,5
+D2,2	D1	W	N0,2	U0,2		V2				R				t2,5
+D2,3			N1,2	D0,0			V2		G0,0	B0,0				T2,5
+D2,2	D1	W	N2,3	P3	P			V3						t3,5
+D1,2	F		N0,3	d1,3	G3	V3					r			T3,5
+D3,1			N1,3	U1,1			V3				R
+D1,3			N3,1	D1,0					V1
+D1,3			N2,0	P3				V0
+D2,1			N0,0	d2,3	P	V0			B0,4		B0,0
+D2,1			N1,0		G1		V0	a2,1	F			r
+D1,3			N0,1	U2,1		V1						R
+D3,1			N2,1	D2,0				V1
+D3,2			N1,1	P1		G1,0	V1
+D3,1				d3,1	P	F					B1,0
+D3,2			N2,2		G2			V2					r
+D2,2			N1,2	U3,3			V2	a2,1					R
+D3,2			N1,3	D3,0			V3
+D3,1				P2	P
+D3,1			N2,3	d0,2	G1			V3		r
+D2,2			N1,0	U0,2			V0			R
+D2,3			N2,0	D0,0			G1,0	V0		B1,0
+D0,1				P1	P		F	G2,0		B2,0
+D1,1				d1,1	G1			V1			r
+D1,3			N2,1	U1,3							R
+D0,3			N2,2	D1,1				V2
+D1,1				d2,1
+D0,1			N2,3					V3
+D2,1								V0				r
+D0,3			N2,0	U2,2				V1				R
+D2,2			N2,1	D2,1
+D1,2			N2,2	d3,1				V2					r
+D2,3			N2,3	U3,3				V3					R
+D3,3				D3,1
+D2,2			N2,0	d0,1				V0		r
+D0,3				U0,3						R
+D0,2			N2,1	D0,0				V1
+D1,2				P1
+D0,3			N2,2	d1,1	P			V2
+D3,1					G0						r
+D3,3			N2,3	U1,2				V3			R
+D0,3				D1,0				V0
+D0,3			N2,0
+D0,3			N2,1	P0				V1
+D2,3				d2,0	P			V2
+D2,1			N2,2		G2							r
+D3,1				U2,2								R
+D3,3			N2,3	D2,0				V3
+D2,2				P2
+D2,2			N2,0	d3,2	P			V0					r
+D3,1			N2,1	U3,2	G1			V1					R
+D0,3			N2,2	D3,1				V2
+D2,3				d0,1						r
+D3,3			N2,3	U0,3				V3		R
+D1,1				D0,1
+D1,1			N2,0	d1,1				V0			r
+D2,2			N2,1	U1,2				V1			R
+D3,3			N2,2	D1,1				V2
+D3,2				d2,1				V3
+D2,2			N2,3									r
+D3,1			N2,0	U2,2				V0				R
+D0,1			N2,1	D2,1				V1
+D1,3				P1	P
+D3,3			N2,2	d3,1	G2			V2					r
+D0,2				U3,2									R
+D3,2			N2,3	D3,1				V3
+D0,2				d0,1						r
+D3,1			N2,0	U0,2				V0		R
+D1,2			N2,1	D0,0				V1
+D3,3				P2	P			V2
+D0,2			N2,2	d1,2	G1			V3			r
+D0,2			N2,3	U1,1							R
+D1,2			N2,0	D1,1				V0
+D3,2			N2,1	d2,1				V1				r
+D2,1				U2,2								R
+D2,1			N2,2	D2,1				V2
+D1,1				X				V3
+D1,3			N2,3
+D3,3				d3,1
+D2,3			N2,0					V0					r
+D2,3				U3,2									R
+D3,2			N2,1	D3,1				V1
+D3,3				d0,1						r
+D0,2			N2,2	U0,2				V2		R
+D3,2			N2,3	D0,1				V3
+D2,2
+D3,2			N2,0	P1				V0
+D0,2				d1,1	P
+D2,2			N2,1		G3			V1			r
+D0,3				U1,1							R
+D3,2				D1,1				V2
+D1,2			N2,2	d2,1				V3
+D2,2			N2,3									r
+D1,1			N2,0	U2,2				V0				R
+D0,2				D2,1
+D3,3			N2,1	d3,1				V1					r
+D0,1			N2,2	U3,2				V2					R
+D2,2				D3,1				V3
+D1,3			N2,3	d0,1						r
+D1,3			N2,0	U0,2				V0		R
+D3,1				D0,1
+D3,2			N2,1					V1
+D0,3
+D0,3				P3	P
+D3,3			N2,2	d1,3	G2			V2			r
+D2,2				D1,2				V3			R
+D0,2			N2,3	d2,2								r
+D0,3			N2,0	U2,1				V0				R
+D0,1			N2,1	D2,1				V1
+D0,1				d3,1				A2,5					r
+D3,3				U3,1									R
+D3,3			N2,2	D3,0				V2
+D0,2				P2	P
+D0,2			N2,3	d0,2	G3			V3		r
+D1,1			N2,0	U0,1				V0		R
+D2,1				D0,1				B2,4		B2,0
+D0,3				d1,1				F			r
+D1,1				U1,1
+				D1,1
+D3,2				d2,1							R	r
+D2,2				U2,1
+				D2,1
+D3,2				d3,1								R	r
+D1,2				U3,1									R
+D3,2				D3,1
+
+
+
+The Final Test Shows an abundance of all types of resources:
+High Number of Students, High Number of Machines, High number of Couriers
+
+SodaCost 7 # Manufacturer Suggested Retail Price (MSRP) per bottle
+NumStudents 3 # number of students to create
+MaxPurchases 3 # maximum number of bottles a student purchases
+NumVendingMachines 6 # number of vending machines
+MaxStockPerFlavour 5 # maximum number of bottles of each flavour in a vending machine
+MaxShippedPerFlavour 20 # maximum number of bottles of each flavour generated by the bottling
+TimeBetweenShipments 4 # length of time between shipment pickup
+GroupoffDelay 10 # length of time between initializing gift cards
+ParentalDelay 2 # length of time between deposits of funds
+NumCouriers 6 # maximum number of couriers in the pool
+
+Parent	Gropoff	WATOff	Names	Truck	Plant	Stud0	Stud1	Stud2	Mach0	Mach1	Mach2	Mach3	Mach4	Mach5	Cour0	Cour1	Cour2	Cour3	Cour4	Cour5
+*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*******	*************
+	S	S	S						S7						S	S	S	S	S	S
+			R0							S7
+S			R1
+D0,2
+D0,1
+D2,1
+D2,3
+D0,1
+D2,2
+D2,2
+D0,2
+D1,2
+D0,1
+D0,3			R2								S7
+D1,3			R3									S7
+D1,1			R4										S7
+D2,1			R5											S7
+D1,3
+*SOME PARENT OUTPUT OMITTED*
+D0,2
+D2,2					S	S1,2
+D1,2		C0,5	N0,0	S		V0	S0,2	S3,2
+D2,2		W	N1,1		G54		V1								t0,5
+D0,2		C1,5	N2,2	P54	P			V2							T0,5
+D2,1		C2,5		d0,54	G20				r
+D1,2	D7	T0,7		D0,34					R
+D0,1		W		d1,34		G1,0				r						t1,5
+D0,1	D7	W		U1,4			L		B1,4	R						L1	t2,5
+D2,2		C1,5		D1,18													T2,5
+D1,3	D7	T2,7		d2,18			a0,7				r
+D2,1	F	W		U2,10			G0,0			B0,3	R							t0,7
+D1,3		W		D2,8		B1,5		a3,7	B1,3									T0,7	t1,5
+D0,1		W		d3,8		F		G3,0			B3,3	r							T1,5	t2,7
+D0,1		T1,7		U3,12				B3,5			B3,2	R								T2,7
+D1,1		W		D3,0				F							t1,7
+D0,2							L								L1
+D2,1		C1,5														t1,5
+D2,1		W		P20	P		L									L1
+D2,3		C1,5		d4,20	G32								r
+D1,3		W		U4,3									R				t1,5
+D2,1		T1,7		D4,3													T1,5
+D0,2		W		d5,3										r				t1,7
+D1,2				U5,17			B0,5			B0,2				R				T1,7
+D1,1				D5,0			F
+D0,3
+D2,2				P32
+D1,1				d0,32	P				r
+D1,3				D0,30
+D1,3				d1,30	G49				R	r
+D1,2				U1,4						R
+D1,1				D1,27
+D2,3				d2,27							r
+D1,2				U2,5							R
+D1,2				D2,19
+D0,3				d3,19								r
+D0,3				U3,8								R
+D2,1				D3,15
+D2,1				d4,15									r
+D1,1				U4,2									R
+D2,2				D4,14
+D2,2				d5,14										r
+D1,3				U5,11										R
+D1,2				D5,8
+*ONLY "F" ARE OMITTED*
+
+Only some parent outputs and finishing "F" statements are omitted. You can see that with an abundance of resources, many students only have to query for 1 vending machine before being able to start making purchases. Just as expected as before, the students use different methods of payment with randomness, and some recieve free sodas. Also note the couriers have a lot less work to complete (aside from when they lose the card), with the last courier only have to work once. This is to be expected when the courier number is high relative to number of students. Finally the truck can be seen to be working as intended, making deliveries to all machines.
+
+Further tests with *random* values were performed and yeilded reasonable and/or expected results.
